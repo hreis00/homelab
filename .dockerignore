@@ -1,0 +1,74 @@
+# Git
+.git
+.gitignore
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+*.env
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.docker
+.dockerignore
+
+# Documentation
+README.md
+*.md
+docs/
+
+# Development and IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+log/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+tests/
+*_test.go
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.priv
+
+# Backup files
+*_backup
+*_backup/w
+
+# Node modules
+node_modules/
+
+# VSCode
+.vscode
+
+# Ignore build folder
+dist
+build
+
+# Ignore ESLint, Prettier, and other configuration files that aren't needed in the final image
+.eslint*
+.prettier*
+.editorconfig

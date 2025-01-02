@@ -1,0 +1,69 @@
+# Environment variables
+.env.grafana
+*.env
+
+# Backup files
+*_backup
+*_backup/
+
+# Docker volumes and data
+data/
+volumes/
+prometheus_data/
+grafana_data/
+mongodb_data/
+
+# Logs
+*.log
+logs/
+log/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.priv
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.next
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
