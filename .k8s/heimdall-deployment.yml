@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heimdall
+  namespace: heimdall
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: heimdall
+  template:
+    metadata:
+      labels:
+        app: heimdall
+    spec:
+      containers:
+      - name: heimdall
+        image: linuxserver/heimdall:2.6.3
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "UTC"
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      dnsConfig:
+        nameservers:
+        - 8.8.8.8
+        - 8.8.4.4
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: heimdall-config-pvc
+

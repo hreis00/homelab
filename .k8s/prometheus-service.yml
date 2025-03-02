@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: heimdall
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 31894
+    targetPort: 31894
+    nodePort: 31894
+  selector:
+    app: prometheus

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage-bucket
+  namespace: heimdall
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storage-bucket
+  template:
+    metadata:
+      labels:
+        app: storage-bucket
+    spec:
+      hostNetwork: true
+      containers:
+      - name: storage-bucket
+        image: node:20-alpine
+        workingDir: /app
+        command: ["sh", "-c"]
+        args:
+        - |
+          npm ci
+          npm run build
+          npm start
+        ports:
+        - containerPort: 31896
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://localhost:27017/storage-bucket"
+        - name: NEXTAUTH_URL
+          value: "http://localhost:3000"
+        - name: NEXTAUTH_SECRET
+          value: "zbHn56Zm/PVjSCz10V1e00mU4CfCH8uYFqpXXsHnpg0="
+        - name: NEXT_PUBLIC_API_URL
+          value: "http://localhost:3000"
+        volumeMounts:
+        - name: app-source
+          mountPath: /app
+      volumes:
+      - name: app-source
+        hostPath:
+          path: /home/hreis/workspace/training/Docker/homelab/storage-bucket
