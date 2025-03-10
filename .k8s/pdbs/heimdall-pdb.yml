@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: heimdall-pdb
+  namespace: heimdall
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: heimdall

@@ -13,6 +13,18 @@ spec:
       labels:
         app: heimdall
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - heimdall
+              topologyKey: "kubernetes.io/hostname"
       containers:
       - name: heimdall
         image: linuxserver/heimdall:2.6.3
@@ -38,5 +50,4 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: heimdall-config-pvc
-
+          claimName: heimdall-config-pvc-v2

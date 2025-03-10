@@ -8,10 +8,14 @@
 
 # Docker volumes and data
 data/
-volumes/
 prometheus_data/
 grafana_data/
 mongodb_data/
+
+# Persistent data directories
+persistent_volumes/
+pv-data/
+uptime-kuma-data/
 
 # Logs
 *.log
@@ -41,6 +45,17 @@ Thumbs.db
 *.tmp
 *.temp
 .cache/
+
+# Kubernetes generated files
+.k8s/volumes/generated/
+kubeconfig
+*.kubeconfig
+
+# Kubernetes secrets
+*.secret.yml
+*.secret.yaml
+*-secret.yml
+*-secret.yaml
 
 # Logs
 logs
