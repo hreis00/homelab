@@ -151,7 +151,7 @@ Extra:
     scripts/start-k8s.sh
     ```
 
-5.  Wait for Docker to finish his magic and navigate to `http://localhost:80`
+5.  Wait for the script to finish his magic and navigate to IP exposed in the terminal.
 
 6.  Enjoy!
 
@@ -161,17 +161,18 @@ Extra:
 
 ## Usage
 
-After starting the containers, access the services at:
+Once the script finishes setting up the pods, navigate to the IP provided in the terminal. Here goes a list of the ports used for each application:
 
--   **Heimdall**: http://localhost:80
--   **Grafana**: http://localhost:3002
+-   **Heimdall**: `http://<your_ip>:31890`
+-   **Uptime Kuma**: `http://<your_ip>:30001`
+-   **Glances**: `http://<your_ip>:31892`
+-   **Node Exporter**: `http://<your_ip>:31893/metrics`
+-   **Prometheus**: `http://<your_ip>:31894`
+-   **Grafana**: `http://<your_ip>:31895`
     -   Default username: `admin`
     -   Default password: `admin`
--   **Prometheus**: http://localhost:9090
--   **Node Exporter**: http://localhost:9100/metrics
--   **Glances**: http://localhost:61208
--   **Storage Bucket**: http://localhost:3000
--   **Mongo Express**: http://localhost:8081
+-   **Mongo Express**: `http://<your_ip>:31897`
+-   **Storage Bucket**: `http://<your_ip>:3000`
 
 For more examples, please refer to the [Documentation](/docs/DEVELOPMENT.md)
 
