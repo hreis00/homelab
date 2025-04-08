@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: heimdall
+  name: heimdall
+  namespace: heimdall
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.152.183.124 # Your Cluster IP
+  clusterIPs:
+  - 10.152.183.124  # Your Cluster IPs
+  externalIPs:
+  - 192.168.1.154 # Your LAN IP
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31890 # Your free port
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: heimdall
+  type: LoadBalancer

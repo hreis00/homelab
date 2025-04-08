@@ -53,7 +53,7 @@
 
 ![product-screenshot]
 
-This project is designed to provide a comprehensive monitoring solution using Heimdall as a dashboard interface, integrated with Prometheus, Grafana, Node Exporter, and Glances for complete system monitoring. Additionally, a Storage Bucket built with TypeScript, Next.js, Tailwind CSS, and MongoDB, with MongoDB data accessible through the Mongo Express service.
+This project is designed to provide a comprehensive monitoring solution using Heimdall as a dashboard interface, integrated with Prometheus, Grafana, Node Exporter, Glances and Uptime Kuma for complete system monitoring. Additionally, a Storage Bucket built with TypeScript, Next.js, Tailwind CSS, and MongoDB, with MongoDB data accessible through the Mongo Express service.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -67,6 +67,7 @@ This project is designed to provide a comprehensive monitoring solution using He
 -   [![Tailwind CSS][tailwindcss-shield]][tailwindcss-url]
 -   [![MongoDB][mongodb-shield]][mongodb-url]
 -   [![Docker][docker-shield]][docker-url]
+-   [![Kubernetes][kubernetes-shield]][kubernetes-url]
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FEATURES -->
@@ -78,6 +79,7 @@ This project is designed to provide a comprehensive monitoring solution using He
     -   [x] Node Exporter for hardware and OS metrics
 -   [x] Grafana for visualization and analytics
 -   [x] Glances for system monitoring tool
+-   [x] Implement Uptime Kuma
 -   [x] Storage bucket
     -   [x] Authentication via NextAuth
     -   [x] MongoDB connection
@@ -99,6 +101,7 @@ Software:
 -   node v22.9.0
 -   npm v10.8.3
 -   docker v27.4.1
+-   kubectl v1.32.1
 
 Extra:
 
@@ -114,11 +117,11 @@ Extra:
     cd homelab
     ```
 
-2.  Create environment files
+<!-- 2.  Create environment files
 
     ```bash
     cp .env.example .env && cd storage-bucket && cp .env.example .env && cd ..
-    ```
+    ``` -->
 
 <!-- 3.  Update both .env.grafana and .env files with your settings
 
@@ -136,15 +139,21 @@ Extra:
     NEXT_PUBLIC_API_URL=http://localhost:3000
     ``` -->
 
-3.  Start the Application
+<!-- 3.  Start the Application
 
     ```bash
     docker compose -f docker-compose.yml up -d
+    ``` -->
+
+4.  Run the start script
+
+    ```bash
+    scripts/start-k8s.sh
     ```
 
-4.  Wait for Docker to finish his magic and navigate to `http://localhost:80`
+5.  Wait for the script to finish his magic and navigate to IP exposed in the terminal.
 
-5.  Enjoy!
+6.  Enjoy!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -152,17 +161,18 @@ Extra:
 
 ## Usage
 
-After starting the containers, access the services at:
+Once the script finishes setting up the pods, navigate to the IP provided in the terminal. Here goes a list of the ports used for each application:
 
--   **Heimdall**: http://localhost:80
--   **Grafana**: http://localhost:3002
+-   **Heimdall**: `http://<your_ip>:31890`
+-   **Uptime Kuma**: `http://<your_ip>:30001`
+-   **Glances**: `http://<your_ip>:31892`
+-   **Node Exporter**: `http://<your_ip>:31893/metrics`
+-   **Prometheus**: `http://<your_ip>:31894`
+-   **Grafana**: `http://<your_ip>:31895`
     -   Default username: `admin`
     -   Default password: `admin`
--   **Prometheus**: http://localhost:9090
--   **Node Exporter**: http://localhost:9100/metrics
--   **Glances**: http://localhost:61208
--   **Storage Bucket**: http://localhost:3000
--   **Mongo Express**: http://localhost:8081
+-   **Mongo Express**: `http://<your_ip>:31897`
+-   **Storage Bucket**: `http://<your_ip>:3000`
 
 For more examples, please refer to the [Documentation](/docs/DEVELOPMENT.md)
 
@@ -226,7 +236,7 @@ Distributed under the GPL-3 License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Hugo Reis - [@hbssreis@gmail.com](mailto://hbssreis@example.com)
+Hugo Reis - [hbssreis@gmail.com](mailto://hbssreis@gmail.com)
 
 Project Link: [https://github.com/hreis00/homelab](https://github.com/hreis00/homelab)
 
@@ -265,3 +275,5 @@ Project Link: [https://github.com/hreis00/homelab](https://github.com/hreis00/ho
 [mongodb-url]: https://www.mongodb.com
 [docker-shield]: https://img.shields.io/badge/Docker-24.0+-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [docker-url]: https://www.docker.com
+[kubernetes-shield]: https://img.shields.io/badge/Kubernetes-1.32.1+-2496ED?style=for-the-badge&logo=kubernetes&logoColor=white
+[kubernetes-url]: https://www.kubernetes.com

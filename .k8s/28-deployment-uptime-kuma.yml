@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uptime-kuma
+  namespace: heimdall
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uptime-kuma
+  template:
+    metadata:
+      labels:
+        app: uptime-kuma
+    spec:
+      hostNetwork: true
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - uptime-kuma
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: uptime-kuma
+        image: louislam/uptime-kuma:1.23.4
+        ports:
+        - containerPort: 30001
+          name: http
+        env:
+        - name: PORT
+          value: "30001"
+        volumeMounts:
+        - name: uptime-kuma-data
+          mountPath: /app/data
+      volumes:
+      - name: uptime-kuma-data
+        persistentVolumeClaim:
+          claimName: uptime-kuma-pvc

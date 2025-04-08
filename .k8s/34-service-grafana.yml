@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: heimdall
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 31895
+    targetPort: 31895
+    nodePort: 31895
+  selector:
+    app: grafana
