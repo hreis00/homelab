@@ -74,8 +74,8 @@ services:
       args:
         - MONGODB_URI=mongodb://mongodb:27017/storage-bucket
         - NEXTAUTH_URL=${NEXTAUTH_URL}
-        - NEXTAUTH_SECRET= ${NEXTAUTH_SECRET}
-        - NEXT_PUBLIC_API_URL= ${NEXT_PUBLIC_API_URL}
+        - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     container_name: storage-bucket
     ports:
       - "3000:3000"

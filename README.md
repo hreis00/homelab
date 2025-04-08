@@ -236,7 +236,7 @@ Distributed under the GPL-3 License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Hugo Reis - [@hbssreis@gmail.com](mailto://hbssreis@example.com)
+Hugo Reis - [hbssreis@gmail.com](mailto://hbssreis@gmail.com)
 
 Project Link: [https://github.com/hreis00/homelab](https://github.com/hreis00/homelab)
 

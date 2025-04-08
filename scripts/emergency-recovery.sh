@@ -1,13 +1,11 @@
-# Cores para melhor visibilidade
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 MAGENTA='\033[0;35m'
 CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Função para imprimir mensagens formatadas
 log_info() {
     echo -e "${BLUE}[INFO]${NC} $1"
 }
@@ -28,7 +26,6 @@ log_step() {
     echo -e "${CYAN}[STEP]${NC} $1"
 }
 
-# Função para confirmar ação
 confirm() {
     read -p "$(echo -e ${YELLOW}[CONFIRM]${NC}) $1 (s/n): " response
     case "$response" in
@@ -82,10 +79,8 @@ if [ -n "$PENDING_PVCS" ]; then
     if confirm "Deseja converter PVCs pendentes para usar emptyDir temporariamente?"; then
         log_step "Identificando deployments que usam PVCs pendentes..."
 
-        # Esta é uma simplificação - em um ambiente real, seria necessário analisar cada deployment
         log_warning "Esta operação requer reinicialização completa. Prosseguindo com reinicialização simplificada..."
 
-        # Simplificação: modificar todos os deployments para usar emptyDir
         for deployment in $(kubectl get deployments -n heimdall -o name); do
             log_info "Modificando $deployment para usar emptyDir..."
             kubectl patch $deployment -n heimdall --type json -p '[{"op":"replace","path":"/spec/template/spec/volumes/0/persistentVolumeClaim","value":null},{"op":"add","path":"/spec/template/spec/volumes/0/emptyDir","value":{}}]' 2>/dev/null || log_warning "Não foi possível modificar $deployment"

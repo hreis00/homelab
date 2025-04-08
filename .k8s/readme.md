@@ -1,4 +1,4 @@
-# Kubernetes Homelab Configuration
+# Kubernetes Home Lab Configuration
 
 Este diretório contém a configuração Kubernetes para um ambiente homelab, projetado para lidar com a mutabilidade do ambiente (adição/remoção de nós).
 

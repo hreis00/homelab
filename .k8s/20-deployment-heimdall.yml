@@ -1,3 +1,4 @@
+# filepath: /home/hreis/workspace/training/Docker/homelab/.k8s/20-deployment-heimdall.yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,6 +26,16 @@ spec:
                   values:
                   - heimdall
               topologyKey: "kubernetes.io/hostname"
+      initContainers:
+      - name: init-config
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args: ["cp -r /data/* /config/ || true"]
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: data
+          mountPath: /data
       containers:
       - name: heimdall
         image: linuxserver/heimdall:2.6.3
@@ -50,4 +61,8 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: heimdall-config-pvc-v2
+          claimName: heimdall-config-pvc
+      - name: data
+        hostPath:
+          path: "/home/hreis/workspace/training/Docker/homelab/config" # Placeholder que será substituído pelo script
+          type: Directory
